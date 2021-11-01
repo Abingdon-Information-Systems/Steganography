@@ -32,6 +32,11 @@ def create_seeded_list(initial_list, seed):
     seeded_list = initial_list.copy()
     random.seed(seed)
     random.shuffle(seeded_list)
+
+    sample_pixel_list = []
+    for i in range(10):
+        sample_pixel_list.append(seeded_list[i])
+    print('First ten pixels of the seeded list are printed below: '+str(sample_pixel_list)+"\n")
     return seeded_list
     
 def randomise_list(initial_list):
