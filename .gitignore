@@ -1,3 +1,9 @@
+### Project specific files ###
+
+/images/*
+
+
+
 # Created by https://www.toptal.com/developers/gitignore/api/intellij,visualstudio,python,flask,visualstudiocode,pycharm
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij,visualstudio,python,flask,visualstudiocode,pycharm
 
