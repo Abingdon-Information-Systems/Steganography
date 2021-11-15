@@ -1,6 +1,6 @@
 import git
 
-g = git.cmd.Git()
-g.pull()
+# g = git.cmd.Git()
+# g.pull()
 
 import server
