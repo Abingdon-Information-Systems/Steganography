@@ -1,4 +1,6 @@
-from flask import Flask, Response, jsonify, send_file, request
+import os
+
+from flask import Flask, Response, jsonify, send_file, request, abort
 
 import imageUtils
 
@@ -12,10 +14,12 @@ def getRandomMeme(methods=['GET']):
 
 @app.route("/image/<imageId>")
 def getPngImage(imageId, methods=['GET']):
-    if imageId.endswith(".png"):
-        return send_file(f"images/{imageId}")
-    else:
-        return send_file(f"images/{imageId}.png")
+    file_path = f"images/{imageId}" if imageId.endswith(".png") else f"images/{imageId}.png"
+
+    if not os.path.isfile(file_path):
+        abort(404)
+
+    return send_file(file_path)
 
 
 @app.route("/jpg-to-png")
