@@ -1,11 +1,9 @@
-from flask import Flask
-from flask import Response
-from flask import jsonify
+from flask import Flask, Response, jsonify
 
 app = Flask(__name__)
 
 @app.route("/")
-def getRandomMeme():
+def getRandomMeme(methods=['GET']):
     return jsonify(url="abc.xyz")
 
 
