@@ -10,9 +10,7 @@ client = ImgurClient(client_id, client_secret)
 def getRandomImage():
     while True:
         page = random.randint(0, 10)
-
-        items = client.memes_subgallery(sort='viral', page=page, window='week')
-
+        items = client.memes_subgallery(sort='viral', page=page, window='month')
         imagelist = []
         print(len(items))
         for (i, item) in enumerate(items):
