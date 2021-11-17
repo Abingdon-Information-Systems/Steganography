@@ -26,6 +26,7 @@ def getPngImage(imageId, methods=['GET']):
 @app.route("/jpg-to-png")
 def img_to_png():
     url = request.args.get("url")
+    endId = ""
     try:
         endId = imageUtils.imgToJPG(url)
     except PIL.UnidentifiedImageError:
