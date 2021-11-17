@@ -1,5 +1,6 @@
 import os
 
+import PIL
 from flask import Flask, Response, jsonify, send_file, request, abort
 
 import imageUtils
@@ -25,9 +26,14 @@ def getPngImage(imageId, methods=['GET']):
 @app.route("/jpg-to-png")
 def img_to_png():
     url = request.args.get("url")
+    try:
+        endId = imageUtils.imgToJPG(url)
+    except PIL.UnidentifiedImageError:
+        abort(400)  # if the url is invalid a 400 error should be thrown (I think it should be 400 at least)
 
-    endId = imageUtils.imgToJPG(url)
     return jsonify(id=endId, url=f"/image/{endId}.png")
+
+
 
 
 app.run()
