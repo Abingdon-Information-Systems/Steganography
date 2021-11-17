@@ -1,6 +1,1 @@
-import git
-
-# g = git.cmd.Git()
-# g.pull()
-
 import server
