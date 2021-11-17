@@ -4,13 +4,16 @@ import PIL
 from flask import Flask, Response, jsonify, send_file, request, abort
 
 import imageUtils
+import imgurRandomMeme
 
 app = Flask(__name__)
 
+getRandomImage = imgurRandomMeme.getRandomImage()
 
 @app.route("/")
 def getRandomMeme(methods=['GET']):
-    return jsonify(url="abc.xyz")
+    url = next(getRandomImage)
+    return jsonify(url=url)
 
 
 @app.route("/image/<imageId>")
