@@ -4,6 +4,7 @@ from io import BytesIO
 import os.path
 import random
 
+
 def getImageFromUrl(url):
     response = requests.get(url)
     img = Image.open(BytesIO(response.content))
@@ -12,10 +13,10 @@ def getImageFromUrl(url):
 
 def getImageID(source):
     if "//" in source:
-        source = source.split("//")[1] # remove protocol information
+        source = source.split("//")[1]  # remove protocol information
     source = source.replace("/", ".")
-    while os.path.isfile(f"images/{source}.png"): # make sure it is unique, don't overwrite currently written files
-        source += str(random.randrange(0, 10)) # TODO add a check that means identical files are grouped.
+    while os.path.isfile(f"images/{source}.png"):  # make sure it is unique, don't overwrite currently written files
+        source += str(random.randrange(0, 10))  # TODO add a check that means identical files are grouped.
     return source
 
 

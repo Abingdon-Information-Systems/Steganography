@@ -1,9 +1,7 @@
 import os
-
-import PIL
-from flask import Flask, Response, jsonify, send_file, request, abort
 import threading
-
+import PIL
+from flask import Flask, jsonify, send_file, request, abort
 import imageUtils
 import imgurRandomMeme
 
@@ -11,6 +9,7 @@ app = Flask(__name__)
 
 getRandomImage = imgurRandomMeme.getRandomImage()
 lock = threading.Lock()
+
 
 @app.route("/")
 def getRandomMeme(methods=['GET']):
@@ -28,8 +27,6 @@ def getMeme():
     imageUtils.savePNG(imageUtils.getImageFromUrl(url), imId)
 
     return getPngImage(imId)
-
-
 
 
 @app.route("/image/<imageId>")
@@ -52,8 +49,6 @@ def img_to_png():
         abort(400)  # if the url is invalid a 400 error should be thrown (I think it should be 400 at least)
 
     return jsonify(id=endId, url=f"/image/{endId}.png")
-
-
 
 
 app.run()
