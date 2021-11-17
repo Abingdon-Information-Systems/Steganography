@@ -20,10 +20,14 @@ def getImageID(source):
 
 
 def imgToJPG(url):
-    endPath = getImageID("".join(url.split(".")[:-1]))
+    endPath = getImageID("".join(url.split("//")[:-1]))
 
     jpgImage = getImageFromUrl(url)
 
     jpgImage.save(f"images/{endPath}.png", format="png")
 
     return endPath
+
+
+def savePNG(image, id):
+    image.save(f"images/{id}.png", format="png")

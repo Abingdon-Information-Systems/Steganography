@@ -2,6 +2,7 @@ import os
 
 import PIL
 from flask import Flask, Response, jsonify, send_file, request, abort
+import threading
 
 import imageUtils
 import imgurRandomMeme
@@ -9,11 +10,26 @@ import imgurRandomMeme
 app = Flask(__name__)
 
 getRandomImage = imgurRandomMeme.getRandomImage()
+lock = threading.Lock()
 
 @app.route("/")
 def getRandomMeme(methods=['GET']):
-    url = next(getRandomImage)
+    with lock:
+        url = next(getRandomImage)
     return jsonify(url=url)
+
+
+@app.route("/meme")
+def getMeme():
+    with lock:
+        url = next(getRandomImage)
+
+    imId = imageUtils.getImageID("".join(url.replace(".png", "").split("//")[-1]))
+    imageUtils.savePNG(imageUtils.getImageFromUrl(url), imId)
+
+    return getPngImage(imId)
+
+
 
 
 @app.route("/image/<imageId>")

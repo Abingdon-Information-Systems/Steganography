@@ -8,13 +8,16 @@ client = ImgurClient(client_id, client_secret)
 
 
 def getRandomImage():
-    page = random.randint(0, 10)
+    while True:
+        page = random.randint(0, 10)
 
-    items = client.memes_subgallery(sort='viral', page=page, window='week')
+        items = client.memes_subgallery(sort='viral', page=page, window='week')
 
-    imagelist = []
-    for item in items:
-        link = item.link
-        if link[-4:] == ".png":
-            imagelist.append(link)
-            yield link
+        imagelist = []
+        print(len(items))
+        for (i, item) in enumerate(items):
+            link = item.link
+            if link[-4:] == ".png":
+                print(i)
+                imagelist.append(link)
+                yield link
