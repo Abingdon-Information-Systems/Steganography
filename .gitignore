@@ -801,3 +801,5 @@ FodyWeavers.xsd
 *.jpeg
 *.jpg
 launch.json
+
+/imgurRandom/images/*.png
